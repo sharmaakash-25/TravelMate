@@ -2,7 +2,12 @@ import express from "express"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import User from "../models/User.js"
-const authMiddleware = require("../middleware/authMiddleware")
+
+import express from "express"
+import { registerUser, loginUser, getMe } from "../controllers/authController.js"
+
+import authMiddleware from "../middleware/authMiddleware.js"
+
 const router = express.Router()
 
 // REGISTER
