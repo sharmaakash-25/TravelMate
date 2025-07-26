@@ -2,7 +2,7 @@ import express from "express"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import User from "../models/User.js"
-
+const authMiddleware = require("../middleware/authMiddleware")
 const router = express.Router()
 
 // REGISTER
@@ -38,6 +38,22 @@ router.post("/login", async (req, res) => {
     res.status(200).json({ token, user: { id: user._id, username: user.username, email: user.email } })
   } catch (err) {
     res.status(500).json({ error: err.message })
+  }
+})
+
+// @route   GET /api/auth/me
+// @desc    Get current logged-in user
+// @access  Private
+router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password")
+    if (!user) {
+      return res.status(404).json({ message: "User not found" })
+    }
+    res.json({ user })
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send("Server Error")
   }
 })
 
