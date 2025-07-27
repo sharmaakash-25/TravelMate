@@ -37,4 +37,11 @@ export const AuthProvider = ({ children }) => {
   return <AuthContext.Provider value={{ user, setUser, logout }}>{children}</AuthContext.Provider>
 }
 
+// Already correct — DO NOT change this
+const res = await axios.get("/api/auth/me", {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+})
+
 export const useAuth = () => useContext(AuthContext)

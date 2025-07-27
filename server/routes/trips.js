@@ -1,3 +1,5 @@
+//server/routes/trips.js
+
 import express from "express"
 import Trip from "../models/Trip.js"
 import { protect } from "../middleware/authMiddleware.js"

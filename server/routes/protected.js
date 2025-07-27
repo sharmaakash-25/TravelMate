@@ -1,3 +1,5 @@
+//server/routes/protected.js
+
 import express from "express"
 import { protect } from "../middleware/authMiddleware.js"
 
